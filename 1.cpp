@@ -1,5 +1,3 @@
-#define _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES	1
-
 #include<bangtal.h>
 
 #include<stdio.h>
@@ -18,7 +16,8 @@ int y[17] = { 240, 240, 240, 320, 320, 320, 400, 400, 400, 470, 470, 470, 540, 5
 int from[100];
 int to[100];
 int i = 1;
-
+int height = 1;
+int p1 = 1, p2 = 1, p3 = 1, p4 = 1, p5 = 1;
 
 void hanoi(int n, char a, char b, char c) {
     if (n == 1) {
@@ -48,29 +47,57 @@ void game_start() {
         locateObject(peice[i], bg, x[3 * (5 - i)], y[3 * (5 - i)]);
         showObject(peice[i]);
     }
-    srand((unsigned int)time(NULL));
-    timerMixing = createTimer();
 
 }
 void mouseCallback(ObjectID object, int x, int y, MouseAction action) {
     if (object == start) {
         setTimer(timerMixing, animationTime);
         startTimer(timerMixing);
+        hideObject(start);
     }
-
 }
 
 void timerCallback(TimerID timer)
 {
-    
+    if (peice[1] == from[i]) {
+        if (peice[2] == to[i]) height++;
+        if (peice[3] == to[i]) height++;
+        if (peice[4] == to[i]) height++;
+        if (peice[5] == to[i]) height++;
+        locateObject(peice[1], bg, x[height], y[height]);
+        peice[1] = to[i];
+    }
+    else if (peice[1] != from[i] && peice[2] == from[i]) {
+        if (peice[3] == to[i]) height++;
+        if (peice[4] == to[i]) height++;
+        if (peice[5] == to[i]) height++;
+        locateObject(peice[1], bg, x[height], y[height]);
+        peice[2] = to[i];
+    }
+    else if (peice[1] != from[i] && peice[2] != from[i] && peice[3] == from[i]) {
+        if (peice[4] == to[i]) height++;
+        if (peice[5] == to[i]) height++;
+        locateObject(peice[1], bg, x[height], y[height]);
+        peice[3] = to[i];
+    }
+    else if (peice[1] != from[i] && peice[2] != from[i] && peice[3] != from[i] && peice[4] == from[i]) {
+        if (peice[5] == to[i]) height++;
+        locateObject(peice[1], bg, x[height], y[height]);
+        peice[4] = to[i];
+    }
+    else if (peice[1] != from[i] && peice[2] != from[i] && peice[3] != from[i] && peice[4] != from[i] && peice[5] == from[i]) {
+        locateObject(peice[1], bg, x[height], y[height]);
+        peice[5] = to[i];
+    }
     setTimer(timerMixing, animationTime);
     startTimer(timerMixing);
+    i++;
 }
 
 int main() {
     setMouseCallback(mouseCallback);
     setTimerCallback(timerCallback);
-
+    timerMixing = createTimer();
     game_start();
         ;
     startGame(bg);
