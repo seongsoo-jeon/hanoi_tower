@@ -60,35 +60,35 @@ void mouseCallback(ObjectID object, int x, int y, MouseAction action) {
 
 void timerCallback(TimerID timer)
 {
-    if (peice[1] == from[i]) {
-        if (peice[2] == to[i]) height++;
-        if (peice[3] == to[i]) height++;
-        if (peice[4] == to[i]) height++;
-        if (peice[5] == to[i]) height++;
+    if (p1 == from[i]) {
+        if (p2 == to[i]) height++;
+        if (p3 == to[i]) height++;
+        if (p4 == to[i]) height++;
+        if (p5 == to[i]) height++;
         locateObject(peice[1], bg, x[height], y[height]);
-        peice[1] = to[i];
+        p1 = to[i];
     }
-    else if (peice[1] != from[i] && peice[2] == from[i]) {
-        if (peice[3] == to[i]) height++;
-        if (peice[4] == to[i]) height++;
-        if (peice[5] == to[i]) height++;
-        locateObject(peice[1], bg, x[height], y[height]);
-        peice[2] = to[i];
+    else if (p1 != from[i] && p2 == from[i]) {
+        if (p3 == to[i]) height++;
+        if (p4 == to[i]) height++;
+        if (p5 == to[i]) height++;
+        locateObject(peice[2], bg, x[height], y[height]);
+        p2 = to[i];
     }
-    else if (peice[1] != from[i] && peice[2] != from[i] && peice[3] == from[i]) {
-        if (peice[4] == to[i]) height++;
-        if (peice[5] == to[i]) height++;
-        locateObject(peice[1], bg, x[height], y[height]);
-        peice[3] = to[i];
+    else if (p1 != from[i] && p2 != from[i] && p3 == from[i]) {
+        if (p4 == to[i]) height++;
+        if (p5 == to[i]) height++;
+        locateObject(peice[3], bg, x[height], y[height]);
+        p3 = to[i];
     }
-    else if (peice[1] != from[i] && peice[2] != from[i] && peice[3] != from[i] && peice[4] == from[i]) {
-        if (peice[5] == to[i]) height++;
-        locateObject(peice[1], bg, x[height], y[height]);
-        peice[4] = to[i];
+    else if (p1 != from[i] && p2 != from[i] && p3 != from[i] && p4 == from[i]) {
+        if (p5 == to[i]) height++;
+        locateObject(peice[4], bg, x[height], y[height]);
+        p4 = to[i];
     }
-    else if (peice[1] != from[i] && peice[2] != from[i] && peice[3] != from[i] && peice[4] != from[i] && peice[5] == from[i]) {
-        locateObject(peice[1], bg, x[height], y[height]);
-        peice[5] = to[i];
+    else if (p1 != from[i] && p2 != from[i] && p3 != from[i] && p4 != from[i] && p5 == from[i]) {
+        locateObject(peice[5], bg, x[height], y[height]);
+        p5 = to[i];
     }
     i++;
     setTimer(timerMixing, animationTime);
