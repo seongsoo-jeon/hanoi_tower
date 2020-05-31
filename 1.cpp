@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-
 SceneID bg;
 ObjectID peice[50];
 ObjectID start;
@@ -19,7 +18,7 @@ int i = 1;
 int height = 1;
 int p1 = 1, p2 = 1, p3 = 1, p4 = 1, p5 = 1;
 
-void hanoi(int n, char a, char b, char c) {
+void hanoi(int n, int a, int b, int c) {
     if (n == 1) {
         from[i] = a;
         to[i] = b;
@@ -61,30 +60,90 @@ void mouseCallback(ObjectID object, int x, int y, MouseAction action) {
 void timerCallback(TimerID timer)
 {
     if (p1 == from[i]) {
-        if (p2 == to[i]) height++;
-        if (p3 == to[i]) height++;
-        if (p4 == to[i]) height++;
-        if (p5 == to[i]) height++;
-        locateObject(peice[1], bg, x[height], y[height]);
-        p1 = to[i];
+        if (p1 == 1) {
+            if (p2 == to[i]) height = 3 * height;
+            if (p3 == to[i]) height = 3 * height;
+            if (p4 == to[i]) height = 3 * height;
+            if (p5 == to[i]) height = 3 * height;
+            locateObject(peice[1], bg, x[height], y[height]);
+            p1 = to[i];
+        }
+        else if (p1 == 2) {
+            if (p2 == to[i]) height = 3 * height - 2;
+            if (p3 == to[i]) height = 3 * height - 2;
+            if (p4 == to[i]) height = 3 * height - 2;
+            if (p5 == to[i]) height = 3 * height - 2;
+            locateObject(peice[1], bg, x[height], y[height]);
+            p1 = to[i];
+        }
+        else if (p1 == 3) {
+            if (p2 == to[i]) height = 3 * height - 1;
+            if (p3 == to[i]) height = 3 * height - 1;
+            if (p4 == to[i]) height = 3 * height - 1;
+            if (p5 == to[i]) height = 3 * height - 1;
+            locateObject(peice[1], bg, x[height], y[height]);
+            p1 = to[i];
+        }
     }
     else if (p1 != from[i] && p2 == from[i]) {
-        if (p3 == to[i]) height++;
-        if (p4 == to[i]) height++;
-        if (p5 == to[i]) height++;
-        locateObject(peice[2], bg, x[height], y[height]);
-        p2 = to[i];
+        if (p1 == 1) {
+            if (p3 == to[i]) height = 3 * height;
+            if (p4 == to[i]) height = 3 * height;
+            if (p5 == to[i]) height = 3 * height;
+            locateObject(peice[2], bg, x[height], y[height]);
+            p2 = to[i];
+        }
+        else if (p1 == 2) {
+            if (p3 == to[i]) height = 3 * height - 2;
+            if (p4 == to[i]) height = 3 * height - 2;
+            if (p5 == to[i]) height = 3 * height - 2;
+            locateObject(peice[2], bg, x[height], y[height]);
+            p2 = to[i];
+        }
+        else if (p1 == 3) {
+            if (p3 == to[i]) height = 3 * height - 1;
+            if (p4 == to[i]) height = 3 * height - 1;
+            if (p5 == to[i]) height = 3 * height - 1;
+            locateObject(peice[2], bg, x[height], y[height]);
+            p2 = to[i];
+        }
     }
     else if (p1 != from[i] && p2 != from[i] && p3 == from[i]) {
-        if (p4 == to[i]) height++;
-        if (p5 == to[i]) height++;
-        locateObject(peice[3], bg, x[height], y[height]);
-        p3 = to[i];
+        if (p1 == 1) {
+            if (p4 == to[i]) height = 3 * height;
+            if (p5 == to[i]) height = 3 * height;
+            locateObject(peice[3], bg, x[height], y[height]);
+            p3 = to[i];
+        }
+        else if (p1 == 2) {
+            if (p4 == to[i]) height = 3 * height - 2;
+            if (p5 == to[i]) height = 3 * height - 2;
+            locateObject(peice[3], bg, x[height], y[height]);
+            p3 = to[i];
+        }
+        else if (p1 == 3) {
+            if (p4 == to[i]) height = 3 * height - 1;
+            if (p5 == to[i]) height = 3 * height - 1;
+            locateObject(peice[3], bg, x[height], y[height]);
+            p3 = to[i];
+        }
     }
     else if (p1 != from[i] && p2 != from[i] && p3 != from[i] && p4 == from[i]) {
-        if (p5 == to[i]) height++;
-        locateObject(peice[4], bg, x[height], y[height]);
-        p4 = to[i];
+        if (p1 == 1) {
+            if (p5 == to[i]) height = 3 * height;
+            locateObject(peice[4], bg, x[height], y[height]);
+            p4 = to[i];
+        }
+        else if (p1 == 2) {
+            if (p5 == to[i]) height = 3 * height - 2;
+            locateObject(peice[4], bg, x[height], y[height]);
+            p4 = to[i];
+        }
+        else if (p1 == 3) {
+            if (p5 == to[i]) height = 3 * height - 1;
+            locateObject(peice[4], bg, x[height], y[height]);
+            p4 = to[i];
+        }
     }
     else if (p1 != from[i] && p2 != from[i] && p3 != from[i] && p4 != from[i] && p5 == from[i]) {
         locateObject(peice[5], bg, x[height], y[height]);
@@ -93,14 +152,12 @@ void timerCallback(TimerID timer)
     i++;
     setTimer(timerMixing, animationTime);
     startTimer(timerMixing);
-
 }
 
 int main() {
     setMouseCallback(mouseCallback);
     setTimerCallback(timerCallback);
-    hanoi(5, 1, 3, 2);
+    hanoi(5, 1, 2, 3);
     game_start();
-
     startGame(bg);
 }
