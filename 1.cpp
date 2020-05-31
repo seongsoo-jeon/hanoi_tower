@@ -51,6 +51,7 @@ void game_start() {
 }
 void mouseCallback(ObjectID object, int x, int y, MouseAction action) {
     if (object == start) {
+        timerMixing = createTimer();
         setTimer(timerMixing, animationTime);
         startTimer(timerMixing);
         hideObject(start);
@@ -89,16 +90,17 @@ void timerCallback(TimerID timer)
         locateObject(peice[1], bg, x[height], y[height]);
         peice[5] = to[i];
     }
+    i++;
     setTimer(timerMixing, animationTime);
     startTimer(timerMixing);
-    i++;
+
 }
 
 int main() {
     setMouseCallback(mouseCallback);
     setTimerCallback(timerCallback);
-    timerMixing = createTimer();
+    hanoi(5, 1, 3, 2);
     game_start();
-        ;
+
     startGame(bg);
 }
